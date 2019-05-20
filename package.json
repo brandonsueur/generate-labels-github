@@ -1,0 +1,23 @@
+{
+  "name": "createrepository",
+  "version": "1.0.0",
+  "description": "Create a repository with my standards and labels on GitHub !",
+  "main": "index.js",
+  "dependencies": {
+    "github-api": "^3.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonsueur/createRepository.git"
+  },
+  "author": "Brandon Sueur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brandonsueur/createRepository/issues"
+  },
+  "homepage": "https://github.com/brandonsueur/createRepository#readme"
+}
