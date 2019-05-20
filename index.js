@@ -1,15 +1,16 @@
 const GitHub = require('github-api');
 const config = require("./config.json");
 
-// basic auth
-var gh = new GitHub({
-  username: config.username,
-  password: config.password,
+const gh = new GitHub({
   token: config.token
 });
 
-var me = gh.getUser(); 
-console.log(me);
+const me = gh.getUser();
 
-// créer un dépôt
+me.getProfile().then(user => {
+  console.log(`👋🏻 Welcome ${user.data.name} !`, `\n`)
+  console.log(`---------------------------- >>`)
+});
+
+// create repository
   // créer les différents labels(labels.js)
