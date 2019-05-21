@@ -9,8 +9,11 @@ const me = gh.getUser()
 //   console.log(`---------------------------- >>`)
 // })
 
-me.createRepo({'name': config.repository}).then(repo => {
-  console.log(`✅ Le dépôt ${config.repository} est créé.`)
+me.createRepo({'name': config.repository}).then(({data: repo}) => {
+  console.log(`------------------------------------`)
+  console.log(`|`)
+  console.log(`| ✅ Le dépôt ${config.repository} est créé.`, `\n`)
+  console.log(`| 🔎 ${repo.html_url}`)
 
   // add labels in repo
 })
