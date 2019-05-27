@@ -25,7 +25,26 @@ me.getProfile()
     }
   })
   .then(() => {
-    console.log(labelsFile)
-    //remoteIssues.createIssue({ title: })
+    label = { name: "toto", color: "red"}
+    remoteIssues.createLabel(label)
+    .then(({data: _createdLabel}) => {
+      createdLabel = label.name
+    })
+
+    // console.log(labelsFile.length)
+    // for (let i = 0; i < labelsFile.length; i++) {
+    //   let labelsExample = {
+    //     name: labelsFile[i].name,
+    //     color: labelsFile[i].color,
+    //   }
+
+    //   console.log(labelsExample);
+
+     
+      
+      
+    //}
+    // console.log(labelsFile[])
+    
   })
 })
