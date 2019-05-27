@@ -4,27 +4,30 @@ const config = require("./config.json")
 const gh = new GitHub({ token: config.token })
 const me = gh.getUser()
 
-remoteIssues = gh.getIssues(config.username, "testing0.8951083679396072");
-
-remoteIssues.listLabels().then(({data: labels}) => {
-  const labelsName = labels.map(label => label.name)
-  remoteIssues.deleteLabel(...labelsName)
+me.getProfile()
+.then(({data: user}) => {
+  console.log(`👋🏻 Welcome ${user.name} !`, `\n`)
 })
-.catch(err => console.log(err))
+.then(() => {
+  // me.createRepo({'name': config.repository, 'public': false})
+  // .then(({data: repo}) => {
+  //   console.log(`✅ Le dépôt ${config.repository} est créé.`, `\n`)
+  //   console.log(`🔎 ${repo.html_url}`, `\n`)
+  // }).catch(err => console.log(err))
+})
+.then(() => {
+  remoteIssues = gh.getIssues(config.username, config.repository);
+  remoteIssues.listLabels().then(({data: labels}) => {
+    let labelsArray = []
+    
+    labels.map(label => labelsArray.push(label.name))
+  
+    for (let i = 0; i < labelsArray.length; i++) {
+      remoteIssues.deleteLabel(labelsArray[i])
+    }
 
-// me.getProfile()
-// .then(({data: user}) => {
-//   console.log(`👋🏻 Welcome ${user.name} !`, `\n`)
-// })
-// .then(() => {
-//   me.createRepo({'name': config.repository + Math.random(), 'public': false}).then(({data: repo}) => {
-//     console.log(`✅ Le dépôt ${config.repository} est créé.`, `\n`)
-//     console.log(`🔎 ${repo.html_url}`, `\n`)
+    console.log(`👌🏼 Labels par défaut supprimé !`)
 
-//     remoteIssues = gh.getIssues(config.username, config.repository);
-//     remoteIssues.listLabels({}, (labels) => console.log(...labels))
-//   })
-//   .catch(err => {
-//     if(err) console.log(`❌ Le dépôt existe déjà !`)
-//   })
-// })
+  })
+  .catch(err => console.log(err))
+})
