@@ -5,18 +5,31 @@ const labelsFile = require("./labels.json")
 const gh = new GitHub({ token: config.token })
 const me = gh.getUser()
 
-
 const main = async () => {
   const { data: user } = await me.getProfile()
   console.log(`👋🏻 Welcome ${user.name} !`, `\n`)
 
   const remoteIssues = gh.getIssues(config.username, 'toto')
+
+  // delete labels
   const { data: labels } = await remoteIssues.listLabels()
   await Promise.all(labels.map(label => remoteIssues.deleteLabel(label.name)))
   console.log(`✅ Labels par défaut supprimé !`)
 
-  const label = { name: "toto", color: "#ff000"}
-  await remoteIssues.createLabel(label)
+  // add new labels
+  remoteIssues.createLabel({name: 'test final'})
+  .then(({ data: _createdLabel }) => {
+    for (let i = 0; i < labelsFile.length; i++) {
+      let labelsExample = {
+        name: labelsFile[i].name,
+        color: labelsFile[i].color,
+      }
+
+      remoteIssues.createLabel(labelsExample)
+    }
+
+    console.log(`✅ Nouveaux Labels ajoutés`)
+  })
 }
 
 main()
