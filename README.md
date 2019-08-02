@@ -2,6 +2,8 @@
 
 Create a repository with my standards and labels on GitHub !
 
+![](https://i.ibb.co/BKN0SLW/Web-1920-1.png)
+
 ### 😊  Talk to me
 Do not hesitate, it's free !
 
